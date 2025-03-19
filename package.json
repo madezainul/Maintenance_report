@@ -1,12 +1,12 @@
 {
   "name": "apic",
   "version": "0.0.0",
-  "description": "Aplikasi Pengaduan Wali Murid",
+  "description": "Maintenance Report",
   "main": "app.js",
   "private": true,
   "scripts": {
     "start": "node app",
-    "dev": "SET DEBUG=apic:server & nodemon -e js,html app.js"
+    "dev": "SET DEBUG=maintenance:server & nodemon -e js,html app.js"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
   "keywords": [
     "none"
   ],
-  "author": "Gema Nur Sidik",
+  "author": "Team",
   "license": "ISC",
   "dependencies": {
     "cookie-session": "^1.4.0",

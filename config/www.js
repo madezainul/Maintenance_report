@@ -1,6 +1,6 @@
 'use strict'
 const http = require('http'),
-      debug = require('debug')('apic:server');
+      debug = require('debug')('maintenance:server');
 
 const normalizePort = val => {
     let port = parseInt(val, 10);
