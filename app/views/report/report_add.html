@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>MAINTENANCE</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="" type="image/x-icon"/>
+	
+	<!-- Fonts and icons -->
+	<script src="/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Open+Sans:300,400,600,700"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['/css/fonts.min.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/fonts.min.css">
+</head>
+<body>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Maintenance</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Hi, {{username}}</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+	<!-- Form -->
+    <div class="container mt-4">
+        <h2>Input Form</h2>
+        <form>
+            <!-- Header Inputs -->
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="input1">Input 1</label>
+                    <input type="text" class="form-control" id="input1" placeholder="Input 1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="input2">Input 2</label>
+                    <input type="text" class="form-control" id="input2" placeholder="Input 2">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="input3">Input 3</label>
+                    <input type="text" class="form-control" id="input3" placeholder="Input 3">
+                </div>
+            </div>
+
+            <!-- 14 Column Inputs -->
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="input4">Input 4</label>
+                    <input type="text" class="form-control" id="input4" placeholder="Input 4">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input5">Input 5</label>
+                    <input type="text" class="form-control" id="input5" placeholder="Input 5">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input6">Input 6</label>
+                    <input type="text" class="form-control" id="input6" placeholder="Input 6">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input7">Input 7</label>
+                    <input type="text" class="form-control" id="input7" placeholder="Input 7">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="input8">Input 8</label>
+                    <input type="text" class="form-control" id="input8" placeholder="Input 8">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input9">Input 9</label>
+                    <input type="text" class="form-control" id="input9" placeholder="Input 9">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input10">Input 10</label>
+                    <input type="text" class="form-control" id="input10" placeholder="Input 10">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input11">Input 11</label>
+                    <input type="text" class="form-control" id="input11" placeholder="Input 11">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="input12">Input 12</label>
+                    <input type="text" class="form-control" id="input12" placeholder="Input 12">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input13">Input 13</label>
+                    <input type="text" class="form-control" id="input13" placeholder="Input 13">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="input14">Input 14</label>
+                    <input type="text" class="form-control" id="input14" placeholder="Input 14">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+	<!-- <div>
+		<h1>HOME</h1>
+	</div> -->
+	<script src="/js/core/jquery.min.js"></script>
+	<script src="/js/plugin/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/js/core/popper.min.js"></script>
+	<script src="/js/core/bootstrap.min.js"></script>
+</body>
+</html>

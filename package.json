@@ -6,8 +6,9 @@
   "private": true,
   "scripts": {
     "start": "node app",
-    "dev": "SET DEBUG=maintenance:server & nodemon -e js,html app.js"
-  },
+    "dev": "SET DEBUG=maintenance:server & nodemon -e js,html app.js",
+    "init-db": "node init_db.js"
+  }, 
   "repository": {
     "type": "git",
     "url": "none"
