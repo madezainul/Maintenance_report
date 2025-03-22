@@ -13,7 +13,7 @@ exports.Message = {
             console.log(info.response);
         });
     },
-    forgotPassword: (email, token) => {
+    forgetPassword: (email, token) => {
         let data = {
             from: 'Humas ICBS',
             to: email,

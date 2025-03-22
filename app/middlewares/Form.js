@@ -15,18 +15,18 @@ exports.Form = {
     signup: (req, res, next) => {
         if(getKeyByValue(req.body, '')) {
             req.flash('warning', 'data tidak boleh kosong');
-            return res.redirect('/signup');
+            return res.redirect('/auth/signup');
         }
         if(req.body.password.length < 8 ) {
             req.flash('warning', 'password minimal delapan karakter');
-            return res.redirect('/signup');
+            return res.redirect('/auth/signup');
         }
         next();
     },
-    forgotPass: (req, res, next) => {
+    forgetPass: (req, res, next) => {
         if(getKeyByValue(req.body, '')) {
             req.flash('warning', 'data tidak boleh kosong');
-            return res.redirect('/forgotpass');
+            return res.redirect('/forgetpass');
         }
         next();
     },

@@ -35,7 +35,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">
+                    <a class="nav-link" href="/auth/signout">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
@@ -56,122 +56,16 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Data will be populated here -->
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-                 <tr>
-                    <td>2021-01-01</td>
-                    <td>A</td>
-                    <td>John Doe</td>
-                    <td>John Doe</td>
-                 </tr>
-            </tbody>
+               <% for(var i=0; i < reports.length; i++) { %>
+               <tr>
+                   <td><a href="/report/report_detail/<%= reports[i].id %>"><%= reports[i].date %></a></td>
+                   <td><%= reports[i].shift %></td>
+                   <td><%= reports[i].supervisor %></td>
+                   <td><%= reports[i].technician_name %></td>
+               </tr>
+               <% } %>
+           </tbody>
+            
         </table>
     </div>
 

@@ -2,52 +2,35 @@
 const {User} = require('../models/UserModel');
 
 exports.Auth = {
-    isSuperUser: (req, res, next) => {
+    isAdmin: (req, res, next) => {
         if(!req.session.id) {
-            return res.redirect('/signin');
+            return res.redirect('/auth/signin');
         }
         User.getone('id', req.session.id, (err, userRow) => {
             if(!userRow) {
                 req.flash('warning' ,'akun tidak ditemukan');
-                return res.redirect('/signin');
+                return res.redirect('/auth/signin');
             }
-            if(userRow.role != 'superuser') {
+            if(userRow.role != 'ADMIN') {
                 req.flash('warning', 'akses tidak diizinkan');
-                return res.redirect('/signin');
+                return res.redirect('/auth/signin');
             }
             req.user = userRow;
             next();
         });
     },
-    isWaliSantri: (req, res, next) => {
+    isUser: (req, res, next) => {
         if(!req.session.id) {
-            return res.redirect('/signin');
+            return res.redirect('/auth/signin');
         }
         User.getone('id', req.session.id, (err, userRow) => {
             if(!userRow) {
                 req.flash('warning' ,'akun tidak ditemukan');
-                return res.redirect('/signin');
+                return res.redirect('/auth/signin');
             }
-            if(userRow.role != 'walisantri') {
+            if(userRow.role != 'USER') {
                 req.flash('warning', 'akses tidak diizinkan');
-                return res.redirect('/signin');
-            }
-            req.user = userRow;
-            next();
-        });
-    },
-    isIcbsStaff: (req, res, next) => {
-        if(!req.session.id) {
-            return res.redirect('/signin');
-        }
-        User.getone('id', req.session.id, (err, userRow) => {
-            if(!userRow) {
-                req.flash('warning' ,'akun tidak ditemukan');
-                return res.redirect('/signin');
-            }
-            if(userRow.role != 'icbsstaff') {
-                req.flash('warning', 'akses tidak diizinkan');
-                return res.redirect('/signin');
+                return res.redirect('/auth/signin');
             }
             req.user = userRow;
             next();
