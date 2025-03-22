@@ -29,12 +29,14 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Hi, {{username}}</a>
+                    <a class="nav-link" href="#">Hi, Jhon Doe</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
                 </li>
             </ul>
         </div>
@@ -44,7 +46,7 @@
     <div class="container mt-4">
         <h2>Report Form</h2>
         <form>
-            <!-- Header Inputs -->
+            <!-- Header Form -->
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="month">Year</label>
@@ -63,7 +65,7 @@
                 </div>
             </div>
 
-            <!-- 14 Column Inputs -->
+            <!-- Details Form -->
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="date">Date</label>
@@ -91,39 +93,35 @@
                     <label for="input9">Solution & Parts</label>
                     <textarea class="form-control" id="input9" placeholder="Type here..."></textarea>
                 </div>
-                <div class="form-group col-md-3">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
                     <label for="input10">Status</label>
                     <select class="form-control" id="input10">
                         <option value="1">Done</option>
                         <option value="2">Pending</option>
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label for="input11">Start time</label>
                     <input type="time" class="form-control" id="input11" placeholder="Start time">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="input12">Input 12</label>
-                    <input type="text" class="form-control" id="input12" placeholder="Input 12">
+                <div class="form-group col-md-2">
+                    <label for="input12">End Time</label>
+                    <input type="time" class="form-control" id="input12" placeholder="Input 12">
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="input13">Input 13</label>
-                    <input type="text" class="form-control" id="input13" placeholder="Input 13">
+                <div class="form-group col-md-4">
+                    <label for="tecname">Technician Name</label>
+                    <input type="text" class="form-control" id="tecname" placeholder="Name">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="input14">Input 14</label>
-                    <input type="text" class="form-control" id="input14" placeholder="Input 14">
+                <div class="form-group col-md-2">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" id="category" placeholder="Category">
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
     </div>
 
-	<!-- <div>
-		<h1>HOME</h1>
-	</div> -->
 	<script src="/js/core/jquery.min.js"></script>
 	<script src="/js/plugin/jquery-ui/jquery-ui.min.js"></script>
 	<script src="/js/core/popper.min.js"></script>
