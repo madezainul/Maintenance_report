@@ -58,7 +58,7 @@
             <tbody>
                <% for(var i=0; i < reports.length; i++) { %>
                <tr>
-                   <td><a href="/report/report_detail/<%= reports[i].id %>"><%= reports[i].date %></a></td>
+                   <td><a href="/report/<%= reports[i].id %>"><%= reports[i].date %></a></td>
                    <td><%= reports[i].shift %></td>
                    <td><%= reports[i].supervisor %></td>
                    <td><%= reports[i].technician_name %></td>
