@@ -17,22 +17,22 @@ router.get('/signin', async (req, res) => {
 });
 
 router.post('/signin', Form.signin, (req, res) => {
-    let {email, password} = req.body;
-    User.getone('email', email, (err, userRow) => {
+    let {identity, password} = req.body;
+    User.verify(identity, (err, userRow) => {
         if(!userRow) {
-            req.flash('warning', 'email belum terdaftar');
-            return res.redirect('/signin');
+            req.flash('warning', 'username or email belum terdaftar');
+            return res.redirect('/auth/signin');
         }
         if(!userRow.verified_at) {
             req.flash('warning', 'akun belum diaktivasi, silahkan cek email untuk aktivasi akun anda');
-            return res.redirect('/signin');
+            return res.redirect('/auth/signin');
         }
         if(encrypt(password) != userRow.password) {
             req.flash('warning', 'password salah');
-            return res.redirect('/signin');
+            return res.redirect('/auth/signin');
         }
         req.session.id = userRow.id;
-        res.redirect(`/${userRow.role}`);
+        res.redirect('/');
     });
 });
 
@@ -44,91 +44,92 @@ router.get('/signup', async (req, res) => {
 });
 
 router.post('/signup', Form.signup, (req, res) => {
-    let {name, nis, email, password} = req.body;
-    User.getone('email', email, (err, userRow) => {
+    let {username, email, password} = req.body;
+    User.check(username, email, (err, userRow) => {
         if(userRow) {
-            req.flash('warning', 'email sudah terdaftar, silahkan daftar dengan email lain');
-            return res.redirect('/signup');
+            req.flash('warning', 'username atau email sudah terdaftar');
+            return res.redirect('/auth/signup');
         }
         let userData = {
-            name: name,
+            username: username,
             email: email,
-            role: 'staff',
+            role: 'USER',
             password: encrypt(password),
             token: crypto.randomBytes(32).toString('hex'),
-            created_at: moment().format('DD-MM-YYYY HH:mm'),
+            token_expires_at: moment().add(1, 'd').format('YYYY-MM-DD hh:mm:ss'),
+
+            // remove this if the email verification feature was acivated
+            verified_at: moment().format('YYYY-MM-DD hh:mm:ss')
         };
-        Message.activateAccount(email, userData.token);
+        // Message.activateAccount(email, userData.token);
         User.add(userData, () => {
-            req.flash('success', 'wali murid berhasil didaftarkan, silahkan cek email untuk aktivasi akun anda');
-            res.redirect('/signin');
+            req.flash('success', 'user berhasil didaftarkan, silahkan cek email untuk aktivasi akun anda');
+            res.redirect('/auth/signin');
         });
     });
 });
 
 router.get('/signout', (req, res) => {
     req.session = null;
-    res.redirect('/signin');
+    res.redirect('/auth/signin');
 });
 
-router.get('/activate/:email/:token', (req, res) => {
-    let {email, token} = req.params;
-    User.getone('email', email, (err, userRow) => {
-        if(!userRow) {
-            req.flash('warning', 'email belum terdaftar');
-            return res.redirect('/signin');
-        }
-        if(token != userRow.token) {
-            req.flash('warning', 'token tidak sesuai');
-            return res.redirect('/signin');
-        }
-        let userData = {
-            id: userRow.id,
-            token: null,
-            verified_at: moment().format('DD-MM-YYYY HH:mm'),
-            updated_at: moment().format('DD-MM-YYYY HH:mm')
-        };
-        User.put(userData, () => {
-            req.flash('success', 'aktivasi akun berhasil');
-            res.redirect('/signin');
-        });
-    });
-});
+// router.get('/activate/:email/:token', (req, res) => {
+//     let {email, token} = req.params;
+//     User.getone('email', email, (err, userRow) => {
+//         if(!userRow) {
+//             req.flash('warning', 'email belum terdaftar');
+//             return res.redirect('/signin');
+//         }
+//         if(token != userRow.token) {
+//             req.flash('warning', 'token tidak sesuai');
+//             return res.redirect('/signin');
+//         }
+//         let userData = {
+//             id: userRow.id,
+//             token: null,
+//             verified_at: moment()
+//         };
+//         User.put(userData, () => {
+//             req.flash('success', 'aktivasi akun berhasil');
+//             res.redirect('/signin');
+//         });
+//     });
+// });
 
-router.get('/forgotpass', async (req, res) => {
+router.get('/forgetpass', async (req, res) => {
     let context = {
         title: 'Forgot Password',
     };
-    res.render('auth/forgotpass', context);
+    res.render('auth/forgetpass', context);
 });
 
-router.post('/forgotpass', Form.forgotPass, (req, res) => {
-    let {email} = req.body;
-    User.getone('email', email, (err, userRow) => {
-        if(!userRow) {
-            req.flash('warning', 'email belum terdaftar');
-            return res.redirect('/signin');
-        }
-        if(!userRow.verified_at) {
-            req.flash('warning', 'akun belum diaktivasi, silahkan cek email untuk aktivasi akun anda');
-            return res.redirect('/signin');
-        }
-        let userData = {
-            id: userRow.id,
-            token: crypto.randomBytes(32).toString('hex'),
-            updated_at: moment().format('DD MMMM YYYY HH:mm')
-        };
-        Message.forgotPassword(email, userData.token);
-        User.put(userData, () => {
-            req.flash('success', 'permintaan reset password telah terkirim, silahkan cek email untuk reset password anda');
-            res.redirect('/signin');
-        });
-    });
-});
+// router.post('/forgetpass', Form.forgetPass, (req, res) => {
+//     let {email} = req.body;
+//     User.getone('email', email, (err, userRow) => {
+//         if(!userRow) {
+//             req.flash('warning', 'email belum terdaftar');
+//             return res.redirect('/signin');
+//         }
+//         if(!userRow.verified_at) {
+//             req.flash('warning', 'akun belum diaktivasi, silahkan cek email untuk aktivasi akun anda');
+//             return res.redirect('/signin');
+//         }
+//         let userData = {
+//             id: userRow.id,
+//             token: crypto.randomBytes(32).toString('hex')
+//         };
+//         Message.forgetPassword(email, userData.token);
+//         User.put(userData, () => {
+//             req.flash('success', 'permintaan reset password telah terkirim, silahkan cek email untuk reset password anda');
+//             res.redirect('/signin');
+//         });
+//     });
+// });
 
-router.get('/resetpass/:email/:token', (req, res) => {
-    let {email, token} = req.params;
-    res.render('auth/resetpass');
+// router.get('/resetpass/:email/:token', (req, res) => {
+//     let {email, token} = req.params;
+//     res.render('auth/resetpass');
     // User.getone('email', email, async (err, userRow) => {
     //     if(!userRow) {
     //         req.flash('warning', 'email belum terdaftar');
@@ -144,20 +145,19 @@ router.get('/resetpass/:email/:token', (req, res) => {
     //     };
     //     res.render('auth/resetpass', context);
     // });
-});
+// });
 
-router.post('/resetpass', Form.resetPass, (req, res) => {
-    let {id, password} = req.body;
-    let userData = {
-        id: id,
-        password: encrypt(password),
-        token: null,
-        updated_at: moment().format('DD-MM-YYYY HH:mm')
-    };
-    User.put(userData, () => {
-        req.flash('success', 'reset password berhasil');
-        res.redirect('/signin');
-    });
-});
+// router.post('/resetpass', Form.resetPass, (req, res) => {
+//     let {id, password} = req.body;
+//     let userData = {
+//         id: id,
+//         password: encrypt(password),
+//         token: null
+//     };
+//     User.put(userData, () => {
+//         req.flash('success', 'reset password berhasil');
+//         res.redirect('/signin');
+//     });
+// });
 
 module.exports = router;

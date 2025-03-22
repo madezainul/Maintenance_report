@@ -1,16 +1,27 @@
 'use strict'
 
-const express = require('express'),
-      router = express.Router()
+const { Auth } = require('../middlewares/Auth');
 
-router.get('/', async (req, res) => { 
-    let context = { 
-        title: 'Home',
-    };
-    res.render('home/index', context);
+
+const express = require('express'),
+      moment = require('moment'),
+      router = express.Router(),
+      {ReportHeader} = require('../models/ReportHeaderModel');
+
+router.get('/', async (req, res) => {
+    ReportHeader.all((err, rows) => {
+        rows.forEach(row => {
+            row.date = moment(row.date).format('YYYY-MM-DD'); // Format the date as YYYY-MM-DD
+        });
+        let context = {
+            title: 'Home',
+            reports: rows,
+        };
+        res.render('home/index', context);
+    });
 });
 
-router.get('/help', async (req, res) => {
+router.get('/help', Auth.isUser, async (req, res) => {
     let context = { 
         title: 'Bantuan',
     };
