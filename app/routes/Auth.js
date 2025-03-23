@@ -1,13 +1,21 @@
 'use strict'
 
 const express = require('express'),
-      crypto = require('crypto'),
-      moment = require('moment'),
-      {Form} = require('../middlewares/Form'),
-      {User} = require('../models/UserModel'),
-      {Message} = require('../utils/Message'),
-      router = express.Router(),
-      encrypt = password => crypto.createHmac('sha256', process.env.SECRET_KEY).update(password).digest('hex');
+    crypto = require('crypto'),
+    moment = require('moment'),
+    { Form } = require('../middlewares/Form'),
+    { User } = require('../models/UserModel'),
+    { Message } = require('../utils/Message'),
+    { Auth } = require('../middlewares/Auth'),
+    router = express.Router(),
+    encrypt = password => crypto.createHmac('sha256', process.env.SECRET_KEY).update(password).digest('hex');
+
+router.get('/manager', async (req, res) => {
+    let context = {
+        title: 'Manager',
+    };
+    res.render('auth/manager', context);
+});
 
 router.get('/signin', async (req, res) => {
     let context = {
@@ -17,17 +25,17 @@ router.get('/signin', async (req, res) => {
 });
 
 router.post('/signin', Form.signin, (req, res) => {
-    let {identity, password} = req.body;
+    let { identity, password } = req.body;
     User.verify(identity, (err, userRow) => {
-        if(!userRow) {
+        if (!userRow) {
             req.flash('warning', 'username or email belum terdaftar');
             return res.redirect('/auth/signin');
         }
-        if(!userRow.verified_at) {
+        if (!userRow.verified_at) {
             req.flash('warning', 'akun belum diaktivasi, silahkan cek email untuk aktivasi akun anda');
             return res.redirect('/auth/signin');
         }
-        if(encrypt(password) != userRow.password) {
+        if (encrypt(password) != userRow.password) {
             req.flash('warning', 'password salah');
             return res.redirect('/auth/signin');
         }
@@ -44,9 +52,9 @@ router.get('/signup', async (req, res) => {
 });
 
 router.post('/signup', Form.signup, (req, res) => {
-    let {username, email, password} = req.body;
+    let { username, email, password } = req.body;
     User.check(username, email, (err, userRow) => {
-        if(userRow) {
+        if (userRow) {
             req.flash('warning', 'username atau email sudah terdaftar');
             return res.redirect('/auth/signup');
         }
@@ -130,21 +138,21 @@ router.get('/forgetpass', async (req, res) => {
 // router.get('/resetpass/:email/:token', (req, res) => {
 //     let {email, token} = req.params;
 //     res.render('auth/resetpass');
-    // User.getone('email', email, async (err, userRow) => {
-    //     if(!userRow) {
-    //         req.flash('warning', 'email belum terdaftar');
-    //         return res.redirect('/signin');
-    //     }
-    //     if(token != userRow.token) {
-    //         req.flash('warning', 'token tidak sesuai');
-    //         return res.redirect('/signin');
-    //     }
-    //     let context = {
-    //         title: 'Reset Password',
-    //         id: userRow.id
-    //     };
-    //     res.render('auth/resetpass', context);
-    // });
+// User.getone('email', email, async (err, userRow) => {
+//     if(!userRow) {
+//         req.flash('warning', 'email belum terdaftar');
+//         return res.redirect('/signin');
+//     }
+//     if(token != userRow.token) {
+//         req.flash('warning', 'token tidak sesuai');
+//         return res.redirect('/signin');
+//     }
+//     let context = {
+//         title: 'Reset Password',
+//         id: userRow.id
+//     };
+//     res.render('auth/resetpass', context);
+// });
 // });
 
 // router.post('/resetpass', Form.resetPass, (req, res) => {

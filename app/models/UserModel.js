@@ -8,9 +8,9 @@ exports.User = {
         cb(null);
     },
     check: async (username, email, cb) => {
-        let sql = `SELECT COUNT(*) AS count FROM users WHERE email = '${email}' OR username = '${username}' `;
+        let sql = `SELECT * FROM users WHERE email = '${email}' OR username = '${username}' `;
         const [rows] = await Connector.promise().query(sql);
-        cb(null, rows);
+        cb(null, rows[0]);
     },
     verify: async (identity, cb) => {
         let sql = `SELECT * FROM users WHERE username = '${identity}' OR email = '${identity}' `;
