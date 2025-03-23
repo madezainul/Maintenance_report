@@ -21,12 +21,17 @@ router.get('/report_detail', async (req, res) => {
         if (err) {
             return res.status(500).send('Error getting report');
         }
+<<<<<<< HEAD
         res.render('report_detail', { reports: rows });
         // let context = {
         //     title: 'Report Detail',
         //     reports: rows
         // };
         // res.render('report_detail', context);
+=======
+        console.log(rows);
+        res.render('report/report_detail', { reports: rows });
+>>>>>>> 9c0104589b9088e5740fc53ff5166bdd09b0b4a5
     });
 });
 
