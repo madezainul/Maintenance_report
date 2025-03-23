@@ -37,7 +37,7 @@ router.get('/report_detail', async (req, res) => {
             return res.status(500).send('Error getting report');
         }
         console.log(rows);
-        res.render('report_detail', { reports: rows });
+        res.render('report/report_detail', { reports: rows });
     });
 });
 

@@ -7,6 +7,11 @@ exports.ReportHeader = {
         await Connector.promise().query(sql, row);
         cb(null);
     },
+    check: async (date, shift, cb) => {
+        let sql = `SELECT * FROM report_header WHERE date = '${date}' AND shift = '${shift}' `;
+        const [rows] = await Connector.promise().query(sql);
+        cb(null, rows[0]);
+    },
     all: async cb => {
         let sql = `SELECT * FROM report_header`;
         const [rows] = await Connector.promise().query(sql);
