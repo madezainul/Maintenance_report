@@ -1,6 +1,6 @@
 # Maintenance Report
 
-CREATE TABLE table_name(  
+CREATE TABLE report_header(  
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
     create_time DATETIME COMMENT 'Create Time',
     date DATE NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE table_name(
 ) COMMENT '';
 
 -- Insert 10 rows of data into the table with varied dates and shifts
-INSERT INTO table_name (create_time, date, shift, supervisor, technician_name)
+INSERT INTO report_header (create_time, date, shift, supervisor, technician_name)
 VALUES 
     (NOW(), DATE_SUB(CURDATE(), INTERVAL 1 DAY), 'A', 'John Doe', 'Technician A'),
     (NOW(), DATE_SUB(CURDATE(), INTERVAL 1 DAY), 'B', 'Jane Smith', 'Technician B'),
