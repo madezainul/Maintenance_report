@@ -21,6 +21,16 @@ router.get('/', async (req, res) => {
     });
 });
 
+router.get('/report/:id', (req, res) => {
+    // Report.getone('id', req.params.id, (err, report) => {
+    //     let context = {
+    //         title: 'Report Detail',
+    //         report: report
+    //     };
+        res.render('report/report_detail');
+    // });
+});
+
 router.get('/help', Auth.isUser, async (req, res) => {
     let context = { 
         title: 'Bantuan',
