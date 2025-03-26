@@ -1,7 +1,7 @@
 'use strict'
 
-const express = require('express'),
-router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { ReportDetails } = require('../models/ReportDetails');
 
 
@@ -17,29 +17,34 @@ router.get('/report_add', async (req, res) => {
 });
 
 // Routes untuk handle report_detail
-// router.get('/report_detail', async (req, res) => {
-//     ReportDetails.all((err, rows) => {
-//         if (err) {
-//             return res.status(500).send('Error getting report');
-//         }
-//         // res.render('report_detail', { reports: rows });
-//         let context = {
-//             title: 'Report Detail',
-//             reports: rows
-//         };
-//         res.render('report_detail', context);
-//     });
-// });
-
-//Debugging
 router.get('/report_detail', async (req, res) => {
     ReportDetails.all((err, rows) => {
         if (err) {
             return res.status(500).send('Error getting report');
         }
+<<<<<<< HEAD
+        res.render('report_detail', { reports: rows });
+        // let context = {
+        //     title: 'Report Detail',
+        //     reports: rows
+        // };
+        // res.render('report_detail', context);
+=======
         console.log(rows);
         res.render('report/report_detail', { reports: rows });
+>>>>>>> 9c0104589b9088e5740fc53ff5166bdd09b0b4a5
     });
 });
+
+//Debugging
+// router.get('/report_detail', async (req, res) => {
+//     ReportDetails.all((err, rows) => {
+//         if (err) {
+//             return res.status(500).send('Error getting report');
+//         }
+//         console.log(rows);
+//         res.render('report_detail', { reports: rows });
+//     });
+// });
 
 module.exports = router;

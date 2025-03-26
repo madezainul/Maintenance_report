@@ -66,25 +66,27 @@
                 </tr>
             </thead>
             <tbody>
+
                 
-                <% for(var i=0; i < reports.length; i++) { %>
+                <!-- Data will be populated here -->
+                <% reports.forEach(function(report) { %>
                     <tr>
-                        <td><%= reports[i].date %></td>
-                        <td><%= reports[i].shift %></td>
-                        <td><%= reports[i].equipment_name %></td>
-                        <td><%= reports[i].equipment_id %></td>
-                        <td><%= reports[i].equipment_model %></td>
-                        <td><%= reports[i].problem_description %></td>
-                        <td><%= reports[i].solution_part_replaced %></td>
-                        <td><%= reports[i].status %></td>
-                        <td><%= reports[i].start_time %></td>
-                        <td><%= reports[i].stop_time %></td>
-                        <td><%= reports[i].total_time_spent %></td>
-                        <td><%= reports[i].technician_name %></td>
-                        <td><%= reports[i].supervisor %></td>
-                        <td><%= reports[i].category %></td>
+                        <td><%= report.date %></td>
+                        <td><%= report.shift %></td>
+                        <td><%= report.equipment_name %></td>
+                        <td><%= report.equipment_id %></td>
+                        <td><%= report.equipment_model %></td>
+                        <td><%= report.problem_description %></td>
+                        <td><%= report.solution_part_replaced %></td>
+                        <td><%= report.status %></td>
+                        <td><%= report.start_time %></td>
+                        <td><%= report.stop_time %></td>
+                        <td><%= report.total_time_spent %></td>
+                        <td><%= report.technician_name %></td>
+                        <td><%= report.supervisor %></td>
+                        <td><%= report.category %></td>
                     </tr>
-                <% } %>
+                <% }); %>
             </tbody>
         </table>
     </div>
