@@ -6,13 +6,14 @@ const { ReportDetails } = require('../models/ReportDetails');
 
 
 // Routes untuk handle report_add
-router.post('/report_add', async (req, res) => {
-    ReportDetails.add(req.body, (err) => {
-        if (err) {
-            return res.status(500).send('Error adding report');
-        }
-        res.redirect('/report_detail');
-    });
+router.get('/report_add', async (req, res) => {
+    console.log("aaa");
+    res.render('report_add');
+    // ReportDetails.add(req.body, (err) => {
+    //     if (err) {
+    //         return res.status(500).send('Error adding report');
+    //     }
+    // });
 });
 
 // Routes untuk handle report_detail
